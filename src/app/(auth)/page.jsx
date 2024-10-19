@@ -1,11 +1,16 @@
 'use client'
 
+import { useRouter } from "next/navigation";
+import "../globals.css"
+
 import { useState } from 'react';
 
 export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+
+  const router = useRouter()
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -14,10 +19,10 @@ export default function Login() {
       setError('Email and Password are required');
       return;
     }
-
+    
     // Aquí puedes hacer la llamada a tu API de login
     console.log('Logging in:', { email, password });
-
+    router.push('/dashboard')
     // Reset error
     setError('');
   };

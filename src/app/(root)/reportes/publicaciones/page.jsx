@@ -10,7 +10,7 @@ export default function Publications() {
   return (
     <div className="min-h-screen bg-gray-100 p-8">
       <h1 className="text-4xl font-bold mb-4">Publicaciones reportadas</h1>
-      <hr className="w-2/3 border-t mb-8" />
+      <hr className="w-full border-t mb-8" />
       <table className="w-full table-auto">
         <thead>
           <tr className="text-left">
