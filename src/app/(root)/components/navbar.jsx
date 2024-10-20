@@ -1,4 +1,5 @@
 'use client'
+import { logOutAction } from "@/actions/auth";
 import { ArrowRightEndOnRectangleIcon } from "@heroicons/react/24/outline";
 import { useRouter } from "next/navigation";
 
@@ -7,7 +8,8 @@ const Navbar = () => {
 
   const router = useRouter()
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
+    await logOutAction();
     router.push('/');
   }
 

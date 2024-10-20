@@ -1,50 +1,42 @@
 'use client'
 
-import { useRouter } from "next/navigation";
+import { loginAction } from "@/actions/auth";
 import "../globals.css"
-
-import { useState } from 'react';
+import { useRouter } from "next/navigation";
+import { useForm } from "react-hook-form";
 
 export default function Login() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
 
-  const router = useRouter()
+  const { register, handleSubmit, formState: { errors } } = useForm();
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Validación básica
-    if (!email || !password) {
-      setError('Email and Password are required');
-      return;
-    }
-    
-    // Aquí puedes hacer la llamada a tu API de login
-    console.log('Logging in:', { email, password });
-    router.push('/dashboard')
-    // Reset error
-    setError('');
-  };
+  const router = useRouter();
+
+  const handleLogin = async (data) => {
+      try{
+        await loginAction(data)
+        router.push('/dashboard')
+      }catch(error){
+        console.log("error")
+      }
+  }
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
       <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
         <h2 className="text-2xl font-bold mb-6 text-gray-900 text-center">Login</h2>
-        {error && <p className="text-red-500 mb-4 text-center">{error}</p>}
-        <form onSubmit={handleSubmit} className="space-y-6">
+        <form onSubmit={handleSubmit(handleLogin)} className="space-y-6">
           <div>
             <label htmlFor="email" className="block text-sm font-medium text-gray-700">
               Email
             </label>
             <input
-              id="email"
               type="email"
+              id="email"
+              {...register('email', { required: 'El correo electrónico es obligatorio' })}
               className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
+              placeholder="Introduce tu correo electrónico"
             />
+            {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email.message}</p>}
           </div>
           <div>
             <label htmlFor="password" className="block text-sm font-medium text-gray-700">
@@ -53,11 +45,11 @@ export default function Login() {
             <input
               id="password"
               type="password"
+              {...register('password', { required: 'La contraseña es obligatoria' })}
               className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
+              placeholder="Introduce tu contraseña"
             />
+            {errors.password && <p className="text-red-500 text-sm mt-1">{errors.password.message}</p>}
           </div>
           <button
             type="submit"
