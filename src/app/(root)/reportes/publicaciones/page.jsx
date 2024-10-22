@@ -4,8 +4,9 @@ import { getPublicationReportsAction } from '@/actions/report';
 import CustomLoading from '@/app/components/customLoading';
 import { ArrowTopRightOnSquareIcon } from '@heroicons/react/24/outline';
 import { useEffect, useState } from 'react';
+import React from 'react';
 
-export default function Publications() {
+const Publications = () => {
   const [reportedPublications, setReportedPublications] = useState([])
   const [loading, setLoading] = useState(true)
 
@@ -56,3 +57,4 @@ export default function Publications() {
     </div>
   );
 }
+export default Publications;
