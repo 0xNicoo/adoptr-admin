@@ -1,11 +1,28 @@
+'use client'
+
+import { getPublicationReportsAction } from '@/actions/report';
+import CustomLoading from '@/app/components/customLoading';
 import { ArrowTopRightOnSquareIcon } from '@heroicons/react/24/outline';
+import { useEffect, useState } from 'react';
 
 export default function Publications() {
-  const reportedPosts = [
-    { id: 54, title: "Nombre de la publicación", user: "usuario", date: "Fecha publicación", reports: 8 },
-    { id: 56, title: "Nombre de la publicación", user: "usuario", date: "Fecha publicación", reports: 2 },
-    { id: 70, title: "Nombre de la publicación", user: "usuario", date: "Fecha publicación", reports: 4 },
-  ];
+  const [reportedPublications, setReportedPublications] = useState([])
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    const fetchReportedPublications = async () => {
+      try{
+        const reportData = await getPublicationReportsAction()
+        setReportedPublications(reportData)
+        setLoading(false)
+      }catch(err){
+        console.log(err)
+      }
+    }
+    fetchReportedPublications()
+  }, [])
+
+  if (loading) return <CustomLoading />;
 
   return (
     <div className="min-h-screen bg-gray-100 p-8">
@@ -17,20 +34,20 @@ export default function Publications() {
             <th className="px-4 py-2">Id</th>
             <th className="px-4 py-2">Título</th>
             <th className="px-4 py-2">Usuario</th>
-            <th className="px-4 py-2">Fecha creación</th>
             <th className="px-4 py-2">Reportes</th>
           </tr>
         </thead>
         <tbody>
-          {reportedPosts.map((post) => (
-            <tr key={post.id} className="bg-white shadow-md hover:bg-gray-300 border my-2">
-              <td className="px-4 py-2">{post.id}</td>
-              <td className="px-4 py-2">{post.title}</td>
-              <td className="px-4 py-2">{post.user}</td>
-              <td className="px-4 py-2">{post.date}</td>
+          {reportedPublications.map((pubReport) => (
+            <tr key={pubReport.publication.id} className="bg-white shadow-md hover:bg-gray-300 border my-2">
+              <td className="px-4 py-2">{pubReport.publication.id}</td>
+              <td className="px-4 py-2">{pubReport.publication.title}</td>
+              <td className="px-4 py-2">{pubReport.publication.user.email}</td>
               <td className="px-4 py-2 flex justify-between items-center">
-                <span>{post.reports}</span>
-                <ArrowTopRightOnSquareIcon className="h-6 w-6 text-black ml-2 cursor-pointer" />
+                <span>{pubReport.reportCount}</span>
+                <ArrowTopRightOnSquareIcon 
+                className="h-6 w-6 text-black ml-2 cursor-pointer" 
+                onClick={() => window.open(pubReport.url, '_blank')} />
               </td>
             </tr>
           ))}
