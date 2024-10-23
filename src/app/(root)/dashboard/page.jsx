@@ -42,11 +42,12 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { getProfileReportsAction } from '@/actions/report';
+import { getProfileReportsAction, getPostReportsAction } from '@/actions/report';
 import CustomLoading from '@/app/components/customLoading';
 
 export default function Dashboard() {
   const [totalReportedProfiles, setTotalReportedProfiles] = useState(0);
+  const [totalReportedPosts, setTotalReportedPosts] = useState(0);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -62,6 +63,21 @@ export default function Dashboard() {
     };
 
     fetchReportedProfiles();
+  }, []);
+
+  useEffect(() => {
+    const fetchReportedPosts = async () => {
+      try {
+        const reportData = await getPostReportsAction();
+        setTotalReportedPosts(reportData.length);
+      } catch (err) {
+        console.log(err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchReportedPosts();
   }, []);
 
   if (loading) return <CustomLoading />;
@@ -81,7 +97,7 @@ export default function Dashboard() {
         </div>
         <div className="bg-white shadow-md p-6 rounded-lg flex flex-col items-center justify-center">
           <span className="text-lg">Post reportados</span>
-          <span className="text-red-600 text-4xl font-bold">10</span>
+          <span className="text-red-600 text-4xl font-bold">{totalReportedPosts}</span>
         </div>
         <div className="bg-white shadow-md p-6 rounded-lg flex flex-col items-center justify-center">
           <span className="text-lg">Publicaciones de adopción reportadas</span>
