@@ -34,6 +34,7 @@ const Publications = () => {
           <tr className="text-left">
             <th className="px-4 py-2">Id</th>
             <th className="px-4 py-2">Título</th>
+            <th className="px-4 py-2">Tipo</th>
             <th className="px-4 py-2">Usuario</th>
             <th className="px-4 py-2">Reportes</th>
           </tr>
@@ -43,6 +44,7 @@ const Publications = () => {
             <tr key={pubReport.publication.id} className="bg-white shadow-md hover:bg-gray-300 border my-2">
               <td className="px-4 py-2">{pubReport.publication.id}</td>
               <td className="px-4 py-2">{pubReport.publication.title}</td>
+              <td className="px-4 py-2">{pubReport.publication.type}</td>
               <td className="px-4 py-2">{pubReport.publication.user.email}</td>
               <td className="px-4 py-2 flex justify-between items-center">
                 <span>{pubReport.reportCount}</span>
