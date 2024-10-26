@@ -13,6 +13,10 @@ export async function getProfileReports() {
     return await apiRequest(`/report/profile`, 'GET', null, 'application/json', true)
 }
 
+export async function getProfileReportsByModelId(profileId){
+    return await apiRequest(`/report/profile/${profileId}`, 'GET', null, 'application/json', true)
+}
+
 export async function getPostReports() {
     return await apiRequest(`/report/post`, 'GET', null, 'application/json', true)
 }

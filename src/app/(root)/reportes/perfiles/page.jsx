@@ -3,6 +3,7 @@
 import { getProfileReportsAction } from '@/actions/report';
 import CustomLoading from '@/app/components/customLoading';
 import { ArrowTopRightOnSquareIcon } from '@heroicons/react/24/outline';
+import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
  const Profiles = () => {
@@ -31,7 +32,7 @@ import { useEffect, useState } from 'react';
       <table className="w-full table-auto">
         <thead>
           <tr className="text-left">
-            <th className="px-4 py-2">Id</th>
+            <th className="px-4 py-2">Id del Perfil</th>
             <th className="px-4 py-2">Nombre</th>
             <th className="px-4 py-2">Apellido</th>
             <th className="px-4 py-2">Reportes</th>
@@ -40,7 +41,7 @@ import { useEffect, useState } from 'react';
         <tbody>
           {reportedProfiles.map((profReport) => (
             <tr key={profReport.profile.id} className="bg-white shadow-md hover:bg-gray-300 border my-2">
-              <td className="px-4 py-2">{profReport.profile.id}</td>
+              <td className="px-4 py-2"><Link className="text-blue-500 hover:underline" href={`/reportes/perfiles/${profReport.profile.id}`} >{profReport.profile.id}</Link></td>
               <td className="px-4 py-2">{profReport.profile.firstName}</td>
               <td className="px-4 py-2">{profReport.profile.lastName}</td>
               <td className="px-4 py-2 flex justify-between items-center">
