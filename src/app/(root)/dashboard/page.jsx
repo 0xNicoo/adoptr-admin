@@ -47,6 +47,8 @@ import { getPostsCountAction } from '@/actions/post';
 import { getAdoptedCountAction, getForAdoptionCountAction } from '@/actions/adoption';
 import { getServiceCountAction } from '@/actions/service';
 import { getLostCountAction } from '@/actions/lost';
+import { getProfileCountAction } from '@/actions/profile';
+import { getPublicationCountAction } from '@/actions/publication';
 import CustomLoading from '@/app/components/customLoading';
 import { Inter } from "next/font/google";
 
@@ -63,6 +65,8 @@ export default function Dashboard() {
   const [ forAdoptionCount, setForAdoptionCount ] = useState([]);
   const [ lostCount, setLostCount ] = useState([]);
   const [ serviceCount, setServiceCount ] = useState([]);
+  const [ profileCount, setProfileCount ] = useState([]);
+  const [ publicationCount, setPublicationCount ] = useState([]);
   const [stats, setStats] = useState({});
   const [loading, setLoading] = useState(true);
 
@@ -181,11 +185,39 @@ export default function Dashboard() {
     fetchServiceCount();
   }, []);
 
+  useEffect(() => {
+    const fetchProfileCount = async () => {
+      try {
+        const profileCountData = await getProfileCountAction();
+        setProfileCount(profileCountData);
+      } catch (err) {
+        console.log(err);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchProfileCount();
+  }, []);
+
+  useEffect(() => {
+    const fetchPublicationCount = async () => {
+      try {
+        const publicationCountData = await getPublicationCountAction();
+        setPublicationCount(publicationCountData);
+      } catch (err) {
+        console.log(err);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchPublicationCount();
+  }, []);
+
   if (loading) return <CustomLoading />;
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100">
-      <h1 className={`${inter.className} text-4xl font-bold text-secondary-blue mb-8`}>Adoptr dashboard</h1>
+      <h1 className={`${inter.className} text-4xl font-bold text-secondary-blue my-8`}>Adoptr dashboard</h1>
       <hr className="w-2/3 border-t mb-8" />
       <h2 className={`${inter.className} mb-4 text-secondary-blue text-xl font-medium`}>Reportes</h2>
       <div className={`${inter.className} grid grid-cols-3 gap-8 mx-4 w-3/4`}>
@@ -227,13 +259,13 @@ export default function Dashboard() {
       <div className="bg-white shadow-md p-4 rounded-lg flex flex-col items-center justify-center text-center">
           <span className="text-md">Publicaciones activas</span>
           <span className="text-red-600 text-4xl font-bold">
-            {stats.serviceReported}
+            {publicationCount}
           </span>
         </div>
         <div className="bg-white shadow-md p-4 rounded-lg flex flex-col items-center justify-center text-center">
           <span className="text-md">Perfiles activos</span>
           <span className="text-red-600 text-4xl font-bold">
-            {stats.serviceReported}
+            {profileCount}
           </span>
         </div>
         <div className="bg-white shadow-md p-6 rounded-lg flex flex-col items-center justify-center">
