@@ -5,6 +5,10 @@ export async function getPublicationReports(){
     return await apiRequest(`/report/publication`, 'GET', null, 'application/json', true)
 }
 
+export async function getPublicationReportsByModelId(publicationId){
+    return await apiRequest(`/report/publication/${publicationId}`, 'GET', null, 'application/json', true)
+}
+
 export async function getProfileReports() {
     return await apiRequest(`/report/profile`, 'GET', null, 'application/json', true)
 }

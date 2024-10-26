@@ -3,6 +3,7 @@
 import { getPublicationReportsAction } from '@/actions/report';
 import CustomLoading from '@/app/components/customLoading';
 import { ArrowTopRightOnSquareIcon } from '@heroicons/react/24/outline';
+import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import React from 'react';
 
@@ -42,7 +43,7 @@ const Publications = () => {
         <tbody>
           {reportedPublications.map((pubReport) => (
             <tr key={pubReport.publication.id} className="bg-white shadow-md hover:bg-gray-300 border my-2">
-              <td className="px-4 py-2">{pubReport.publication.id}</td>
+              <td className="px-4 py-2"><Link className="text-blue-500 hover:underline" href={`/reportes/publicaciones/${pubReport.publication.id}`} >{pubReport.publication.id}</Link></td>
               <td className="px-4 py-2">{pubReport.publication.title}</td>
               <td className="px-4 py-2">{pubReport.publication.type}</td>
               <td className="px-4 py-2">{pubReport.publication.user.email}</td>

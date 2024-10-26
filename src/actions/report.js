@@ -1,12 +1,17 @@
 'use server'
 
-import { getPublicationReports } from "@/lib/api/report"
+import { getPublicationReports, getPublicationReportsByModelId } from "@/lib/api/report"
 import { getProfileReports } from "@/lib/api/report"
 import { getPostReports } from "@/lib/api/report"
 import { getStats } from "@/lib/api/report"
 
 export async function getPublicationReportsAction(){
    const {data, headers} = await getPublicationReports()
+   return data
+}
+
+export async function getPublicationReportsByModelIdAction(publicacion){
+   const {data, headers} = await getPublicationReportsByModelId(publicacion)
    return data
 }
 
