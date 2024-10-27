@@ -5,6 +5,7 @@ import CustomLoading from '@/app/components/customLoading';
 import { ArrowTopRightOnSquareIcon } from '@heroicons/react/24/outline';
 import { useEffect, useState } from 'react';
 import React from 'react';
+import Link from 'next/link';
 
 const Posts = () => {
   const [reportedPosts, setReportedPosts] = useState([]);
@@ -41,7 +42,7 @@ const Posts = () => {
         <tbody>
           {reportedPosts.map((posReport) => (
             <tr key={posReport.post.id} className="bg-white shadow-md hover:bg-gray-300 border my-2">
-              <td className="px-4 py-2">{posReport.post.id}</td>
+              <td className="px-4 py-2"><Link className="text-blue-500 hover:underline" href={`/reportes/posts/${posReport.post.id}`} >{posReport.post.id}</Link></td>
               <td className="px-4 py-2">
                 <DescriptionWithReadMore description={posReport.post.description} />
               </td>
