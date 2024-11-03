@@ -3,7 +3,6 @@
 import { getPublicationReports, getPublicationReportsByModelId } from "@/lib/api/report"
 import { getProfileReports, getProfileReportsByModelId } from "@/lib/api/report"
 import { getPostReports, getPostReportsByModelId } from "@/lib/api/report"
-import { getStats } from "@/lib/api/report"
 
 export async function getPublicationReportsAction(){
    const {data, headers} = await getPublicationReports()
@@ -32,10 +31,5 @@ export async function getPostReportsAction(){
 
 export async function getPostReportsByModelIdAction(post){
    const {data, headers} = await getPostReportsByModelId(post)
-   return data
-}
-
-export async function getStatsAction(){
-   const {data, headers} = await getStats()
    return data
 }

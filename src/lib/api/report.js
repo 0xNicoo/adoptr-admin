@@ -24,7 +24,3 @@ export async function getPostReports() {
 export async function getPostReportsByModelId(postId){
     return await apiRequest(`/report/post/${postId}`, 'GET', null, 'application/json', true)
 }
-
-export async function getStats() {
-    return await apiRequest(`/report/stats`, 'GET', null, 'application/json', true)
-}
