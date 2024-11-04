@@ -21,6 +21,7 @@ const Navbar = () => {
       <div className="flex"> 
         <div className="flex items-center space-x-6 pr-8">
             <a href="/dashboard" className="text-white hover:text-gray-300">Dashboard</a>
+            <a href="/donacion" className="text-white hover:text-gray-300">Donaciones</a>
             <a href="/reportes/publicaciones" className="text-white hover:text-gray-300">Publicaciones</a>
             <a href="/reportes/perfiles" className="text-white hover:text-gray-300">Perfiles</a>
             <a href="/reportes/posts" className="text-white hover:text-gray-300">Posts</a>
