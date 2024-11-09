@@ -9,14 +9,23 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@coreui/icons": "^3.0.1",
+    "@coreui/icons-react": "^2.3.0",
     "@heroicons/react": "^2.1.5",
     "@nextui-org/react": "^2.4.8",
+    "@nextui-org/theme": "^2.2.11",
+    "@radix-ui/react-dialog": "^1.1.2",
+    "class-variance-authority": "^0.7.0",
+    "clsx": "^2.1.1",
     "iron-session": "^8.0.3",
     "jwt-decode": "^4.0.0",
+    "lucide-react": "^0.454.0",
     "next": "14.2.15",
     "react": "^18",
     "react-dom": "^18",
-    "react-hook-form": "^7.53.1"
+    "react-hook-form": "^7.53.1",
+    "tailwindcss-animate": "^1.0.7",
+    "zustand": "^5.0.1"
   },
   "devDependencies": {
     "eslint": "^8",

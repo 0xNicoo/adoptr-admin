@@ -25,6 +25,7 @@ const Navbar = () => {
             <a href="/reportes/publicaciones" className="text-white hover:text-gray-300">Publicaciones</a>
             <a href="/reportes/perfiles" className="text-white hover:text-gray-300">Perfiles</a>
             <a href="/reportes/posts" className="text-white hover:text-gray-300">Posts</a>
+            <a href="/servicetype" className="text-white hover:text-gray-300">Servicios</a>
         </div>
         <div className="flex items-center pr-4">
           <button onClick={handleLogout} className="flex bg-red-500 py-1 px-1 rounded items-center text-white hover:text-gray-300">
