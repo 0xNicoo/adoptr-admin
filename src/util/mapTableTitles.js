@@ -12,7 +12,8 @@ const getMappedCardTittle = (key) => {
       lostReported: "Reportes perdidas",
       serviceReported: "Reportes servicios",
       postReported: "Reportes post",
-      profileReported: "Reportes perfil"
+      profileReported: "Reportes perfil",
+      donationCount: "Donaciones"
     };
   
     return mappings[key] || null;
